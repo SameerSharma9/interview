@@ -9,11 +9,6 @@ public class HouseRobber {
 
     //2,7,9,3,1 --> 12
     public int rob(int[] nums) {
-        Integer max = Arrays.stream(nums)
-                .boxed()
-                .sorted()
-                .max(Comparator.comparingInt(Integer::valueOf)).get();
-        int[] dp = new int[max+1];
         int prev1 = 0;
         int prev2 = 0;
         for(int val : nums) {

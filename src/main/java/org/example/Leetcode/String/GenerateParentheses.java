@@ -36,7 +36,7 @@ public class GenerateParentheses {
     }
 
     public static void main(String[] args) {
-        List<String> res = new GenerateParentheses().generateParenthesis(3);
+        List<String> res = new GenerateParentheses().generateParenthesis(4);
         System.out.println(res);
     }
 }

@@ -133,14 +133,16 @@ class EmployeeFactory extends Employee{
         Project SiteReliability = new Project("Site Reliability", "Admin", "Zaheer Khan");
         Project DataTransition = new Project("Data Transition", "Data", "Atif Aslam");
         Project TwoPhaseDeployment =new Project("Two Phase Deployment", "Deployment", "Shaktiman");
+        Project TwoPhaseDeployment2 =new Project("Two Phase Deployment", "Deployment", "Shaktiman2");
+        Project TwoPhaseDeployment3 =new Project("Two Phase Deployment", "Deployment", "Shaktiman");
 
-        employees.add(new Employee("2020Emp0234", "Ahaskar", "Sharan", 900000, 1, Arrays.asList(Delta, Beta)));
+        employees.add(new Employee("2020Emp0234", "Akshay", "Sharan", 900000, 1, Arrays.asList(Delta, Beta)));
         employees.add(new Employee("2012Emp1923", "Dev", "Sharma", 3500000, 3, Arrays.asList(Pegasus, CustomerOnboarding, Beta, SiteReliability)));
         employees.add(new Employee("2017Emp0721", "Priti", "Kabir", 1800000, 3, Arrays.asList(TwoFactorAuth, Beta, CommonUI)));
         employees.add(new Employee("2017Emp00031", "Chris", "Martin", 2200000, 2, Arrays.asList(Delta, TwoFactorAuth)));
         employees.add(new Employee("2013Emp0872", "Sanjay", "Singhania", 2200000, 3, Arrays.asList(Pegasus, Delta, RemoveUsers, DataTransition)));
         employees.add(new Employee("2022Emp0087", "Babu", "Rao", 900000, 1, Arrays.asList(TwoFactorAuth)));
-        employees.add(new Employee("2019Emp0050", "Dev", "Anand", 1300000, 1, Arrays.asList(RemoveUsers, CommonUI)));
+        employees.add(new Employee("2019Emp0050", "Babu", "Anand", 1300000, 1, Arrays.asList(RemoveUsers, CommonUI)));
         employees.add(new Employee("2023Emp0934", "Shruti", "Sen", 1100000, 1, Arrays.asList(Pegasus)));
         employees.add(new Employee("2023Emp1033", "Akshay", "Kumar", 1200000, 0, Arrays.asList(Delta)));
         employees.add(new Employee("2015Emp0009", "Babu", "Dutt", 2600000, 2, Arrays.asList(Verification, RemoveUsers, TwoPhaseDeployment)));
@@ -159,6 +161,7 @@ public class App {
         employeeList = employeeFactory.getAllEmployee();
 
         //List all distinct project in non-ascending order
+
         List<String> p1 = employeeList.stream()
                 .map(Employee::getProjects).flatMap(x->x.stream())
                 .map(Project::getName).sorted(Comparator.reverseOrder()).distinct()
@@ -168,7 +171,10 @@ public class App {
                 .map(Project::getName).distinct().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
         //System.out.println(projectName);
         assert(p1.equals(projectName));
+
+
         //Print full name of any employee whose firstName starts with ‘A’
+
         List<String> p2 = employeeList.stream()
                 .filter(x-> x.getFirstName().startsWith("A"))
                 //.peek(x->System.out.print(x.getFirstName()+" "+x.getLastName()))
@@ -182,7 +188,9 @@ public class App {
 
         assert(p2.equals(empListWithName));
 
+
         //List of all employee who joined in year 2023 (year to be extracted from employee id i.e., 1st 4 characters)
+
         List<Employee> p3 = employeeList.stream()
                 .filter(x->x.getId().startsWith("2023"))
                 //.peek(w-> System.out.println(w.getId()))
@@ -196,6 +204,7 @@ public class App {
         assert(p3.equals(empListJoin2023));
 
         //Sort employees based on firstName, for same firstName sort by salary.
+
         List<Employee> p4 = employeeList.stream()
                 .sorted(Comparator.comparing(Employee::getFirstName).thenComparing(Employee::getSalary))
                // .peek(a-> System.out.println(a.toString()))
@@ -208,6 +217,7 @@ public class App {
         assert (p4.equals(empListSorted));
 
         //Print names of all employee with 3rd highest salary. (generalise it for nth highest salary)
+
         Integer nthHSal = employeeList.stream()
                 .sorted(Comparator.comparing(Employee::getSalary).reversed())
                 .map(Employee::getSalary).distinct()
@@ -240,6 +250,7 @@ public class App {
         assert p5.get(0).getSalary() == nthHs.getKey();
 
         //List of people working on more than 2 projects.
+
         List<Employee> p6 = employeeList.stream()
                 .filter(x-> x.getProjects().size() > 2)
                 //.peek(System.out::println)
@@ -258,18 +269,17 @@ public class App {
         assert p6.size() == empList.size();
 
         //Count of total laptops assigned to the employees
+
         long p7 = employeeList.stream()
                 .map(Employee::getTotalLaptopsAssigned)
                 .mapToInt(Integer::intValue)
                 .sum();
-        int ssum = employeeList.stream()
-                .map(Employee::getTotalLaptopsAssigned)
-                .mapToInt(Integer::intValue)
-                .sum();
+        int ssum = employeeList.stream().mapToInt(Employee::getTotalLaptopsAssigned).sum();
         assert p7 == ssum;
         //System.out.println(ssum);
 
         //Count of all projects with Robert Downey Jr as PM.
+
         long p8 = employeeList.stream()
                 .map(Employee::getProjects)
                 .flatMap(x->x.stream())
@@ -287,6 +297,7 @@ public class App {
         assert p8 == count;
 
         //List of all people working with Robert Downey Jr.
+
         List<Employee> p9 = employeeList.stream()
                 .flatMap(x->x.getProjects().stream()
                         .map(y->new Pair(x,y)))
@@ -317,7 +328,7 @@ public class App {
         //System.out.println(empWorkingWithRDJ);
         assert p9.size() == empWorkingWithRDJ.size();
 
-        //Create a map based on this data, they key should be the year of joining, and value should be list of all the employees who joined the particular year.
+        //Create a map based on this data, the key should be the year of joining, and value should be list of all the employees who joined the particular year.
         Map<String, List<Employee>> p10 = employeeList.stream()
                 .collect(Collectors.groupingBy(x->x.getId().substring(0,4)));
         Map<String, List<Employee>>  mapp = employeeList.stream()
@@ -331,6 +342,8 @@ public class App {
         String[] names = {"sameer","sharma", "dad", "Mom"};
         long total = App.getTotalNumberOfLettersOfNamesLongerThanFive(names);
         //System.out.println(total);
+        Map<String, Map<String, Long>> mapOfMap = employeeList.stream().collect(Collectors.groupingBy(Employee::getFirstName, Collectors.groupingBy(Employee::getLastName, Collectors.counting())));
+
     }
 
     public static long getTotalNumberOfLettersOfNamesLongerThanFive(String... names) {

@@ -1,7 +1,8 @@
 package org.example.Leetcode.String;
 
-import java.util.Arrays;
-import java.util.Map;
+import org.example.Interview;
+
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,8 +38,11 @@ public class ShortestCompletingWord {
         return res;
     }
 
+
     public static void main(String[] args) {
         String word = new ShortestCompletingWord().shortestCompletingWord("1s3 PSt", new String[]{"step","steps","stripe","stepple"});
+        String word2 = new ShortestCompletingWord().shortestCompletingWord("1s3 456", new String[]{"looks","pest","stew","show"});
         System.out.println(word);
+        System.out.println(word2);
     }
 }

@@ -71,9 +71,9 @@ public class LongestValidParantheses {
 
 
     public static void main(String[] args) {
-        int res = new LongestValidParantheses().longestValidParentheses("(()");
+        int res = new LongestValidParantheses().longestValidParentheses(")()())");
         System.out.println(res);
-        int res2 = new LongestValidParantheses().longestValidParenthesesWithOutStack("(()");
+        int res2 = new LongestValidParantheses().longestValidParenthesesWithOutStack(")()())");
         System.out.println(res2);
     }
 }
