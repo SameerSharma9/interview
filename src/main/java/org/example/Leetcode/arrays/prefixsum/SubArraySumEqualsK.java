@@ -26,6 +26,25 @@ public class SubArraySumEqualsK {
         return result;
     }
 
+    public int subarraySum2(int[] nums, int k) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0,1);
+        int pSum = 0;
+        int count = 0;
+        for(int i = 0; i < nums.length; i++) {
+            pSum += nums[i];
+            if(map.containsKey(pSum - k)) {
+                count += map.get(pSum - k);
+            }
+            if(map.containsKey(pSum)) {
+                map.put(pSum, map.get(pSum) + 1);
+            } else {
+                map.put(pSum, 1);
+            }
+        }
+        return count;
+    }
+
     public static void main(String[] args) {
         int[] arr = new int[3];
         arr[0] = 1;

@@ -1,15 +1,20 @@
 package org.example.stream;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class FirstNonRepeated {
     public static void main(String args[]) {
     String input = "Java articles are Awesome";
+        Optional<Character> r = input.chars()
+                .mapToObj(x -> Character.toLowerCase(Character.valueOf((char)x)))
+                .collect(Collectors.groupingBy(Function.identity(), LinkedHashMap::new, Collectors.counting()))
+                .entrySet().stream()
+                .filter(z->z.getValue() == 1)
+                .map(c->c.getKey())
+                .findFirst();
+        System.out.println(r);
 
     Character result = input.chars() // Stream of String
             .mapToObj(s -> Character.toLowerCase(Character.valueOf((char) s))) // First convert to Character object and then to lowercase

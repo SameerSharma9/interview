@@ -1,21 +1,25 @@
 package org.example;
 
-import javax.security.auth.Subject;
-import java.net.InterfaceAddress;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
+import java.util.PriorityQueue;
 
 public class Interview {
-    public static void main(String[] args) {
-        new Interview().method(130);
-    }
 
-    void method(int ls) {
-        System.out.println("hellolist");
+    public static void main(String[] args) {
+
+        List<Integer> arr = Arrays.asList(4,1,3,5,8,2);
+        int k = 3;
+        System.out.println(new Interview().kLarge(arr,k));
     }
-    void method(Integer ls) {
-        System.out.println("helloArraylist");
+    public int kLarge(List<Integer> ls, int K) {
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        for (Integer i : ls) {
+            minHeap.add(i);
+            if (minHeap.size() > K)
+                minHeap.poll();
+        }
+        return minHeap.peek();
     }
 }

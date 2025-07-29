@@ -4,10 +4,7 @@ package org.example.Leetcode.stack;
 
 import javafx.util.Pair;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class DailyTemperature {
 
@@ -35,6 +32,23 @@ public class DailyTemperature {
             stack.add(i);
         }
 
+        return res;
+    }
+
+    public int[] dailyTemperatures2(int[] temperatures) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        Stack<Integer> stack = new Stack<>();
+        stack.push(temperatures[0]);
+        map.put(temperatures[0], 0);
+        int[] res = new int[temperatures.length];
+        Arrays.fill(res, 0);
+        for (int i = 1; i < temperatures.length; i++) {
+            while(!stack.empty() && temperatures[i] > stack.peek()) {
+                res[map.get(stack.peek())] = i - map.get(stack.pop());
+            }
+            stack.push(temperatures[i]);
+            map.put(temperatures[i], i);
+        }
         return res;
     }
 

@@ -2,8 +2,8 @@ package org.example.Leetcode.arrays.prefixsum;
 
 // https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/?envType=daily-question&envId=2024-12-11
 
-import java.util.Arrays;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BeautyArray {
     public int maximumBeauty(int[] nums, int k) {
@@ -69,7 +69,25 @@ public class BeautyArray {
         return max;
     }
 
+    public int maximumBeauty2(int[] nums, int k) {
+        HashMap<Integer, Integer> count = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            for(int j = nums[i]-k; j <= nums[i]+k; j++) {
+                if(j < 0) continue;
+                if(count.containsKey(j)) {
+                    count.put(j, count.get(j)+1);
+                } else {
+                    count.put(j,1);
+                }
+            }
+        }
+        List<Map.Entry<Integer, Integer>> entry= count.entrySet().stream().sorted(Comparator.comparing(x->x.getValue())).collect(Collectors.toList());
+//        System.out.println(entry.get(entry.size()-1).getKey());
+//        System.out.println(entry.get(entry.size()-1).getValue());
+        return entry.get(entry.size()-1).getValue();
+    }
+
     public static void main(String[] args) {
-        System.out.println(new BeautyArray().maximumBeauty(new int[]{4,6,1,2},2));
+        System.out.println(new BeautyArray().maximumBeauty2(new int[]{4,6,1,2},2));
     }
 }

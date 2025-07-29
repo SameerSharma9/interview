@@ -56,7 +56,6 @@ public class DeleteAndEarn {
         return prev1;
     }
 
-
     public static void main(String[] args) {
         long res = new DeleteAndEarn().deleteAndEarnLeetCodeSol(new int[]{1,1,1,2,4,5,5,5,6});
         System.out.println(res);

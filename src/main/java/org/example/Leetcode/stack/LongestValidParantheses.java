@@ -68,6 +68,22 @@ public class LongestValidParantheses {
         // TODO: Unimplemented DP method
         return 0;
     }
+    public int longestValidParentheses2(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int len = 0;
+        for(int i = 0; i < s.length(); i++) {
+            if(s.charAt(i) == ')') {
+                stack.pop();
+                if(stack.empty()) stack.push(i);
+                len = len < i-stack.peek()? i-stack.peek(): len;
+            } else {
+                stack.push(i);
+            }
+        }
+        return len;
+    }
+
 
 
     public static void main(String[] args) {

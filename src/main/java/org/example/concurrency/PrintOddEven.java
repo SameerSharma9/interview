@@ -10,12 +10,7 @@ public class PrintOddEven {
                 obj.printOdd();
             }
         });
-        Thread even = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                obj.printEven();
-            }
-        });
+        Thread even = new Thread(()->obj.printEven());
 
         odd.start();
         even.start();

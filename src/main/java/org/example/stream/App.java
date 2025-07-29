@@ -146,6 +146,7 @@ class EmployeeFactory extends Employee{
         employees.add(new Employee("2023Emp0934", "Shruti", "Sen", 1100000, 1, Arrays.asList(Pegasus)));
         employees.add(new Employee("2023Emp1033", "Akshay", "Kumar", 1200000, 0, Arrays.asList(Delta)));
         employees.add(new Employee("2015Emp0009", "Babu", "Dutt", 2600000, 2, Arrays.asList(Verification, RemoveUsers, TwoPhaseDeployment)));
+        employees.add(new Employee("2015Emp0009", "Raju", "Dutt", 2600000, 2, Arrays.asList(Verification, RemoveUsers, TwoPhaseDeployment)));
 
         return employees;
     }
@@ -159,6 +160,9 @@ public class App {
 
         EmployeeFactory employeeFactory = new EmployeeFactory();
         employeeList = employeeFactory.getAllEmployee();
+
+        Map<String, Employee> map22 = employeeList.stream().collect(Collectors.toMap(Employee::getId,Function.identity(), (o,n)-> n));
+        System.out.println(map22);
 
         //List all distinct project in non-ascending order
 
@@ -204,6 +208,7 @@ public class App {
         assert(p3.equals(empListJoin2023));
 
         //Sort employees based on firstName, for same firstName sort by salary.
+        employeeList.stream().sorted(Comparator.comparing(Employee::getFirstName).thenComparing(Employee::getSalary)).collect(Collectors.toList());
 
         List<Employee> p4 = employeeList.stream()
                 .sorted(Comparator.comparing(Employee::getFirstName).thenComparing(Employee::getSalary))
@@ -269,6 +274,7 @@ public class App {
         assert p6.size() == empList.size();
 
         //Count of total laptops assigned to the employees
+        employeeList.stream().mapToInt(Employee::getTotalLaptopsAssigned).sum();
 
         long p7 = employeeList.stream()
                 .map(Employee::getTotalLaptopsAssigned)
@@ -297,6 +303,8 @@ public class App {
         assert p8 == count;
 
         //List of all people working with Robert Downey Jr.
+//        System.out.println(employeeList.stream().filter(x->x.getProjects().stream().filter(y->y.getProjectManager().equals("Robert Downey Jr")).count()>0)
+//                .map(Employee::getFirstName).collect(Collectors.toList()));
 
         List<Employee> p9 = employeeList.stream()
                 .flatMap(x->x.getProjects().stream()
@@ -329,6 +337,7 @@ public class App {
         assert p9.size() == empWorkingWithRDJ.size();
 
         //Create a map based on this data, the key should be the year of joining, and value should be list of all the employees who joined the particular year.
+
         Map<String, List<Employee>> p10 = employeeList.stream()
                 .collect(Collectors.groupingBy(x->x.getId().substring(0,4)));
         Map<String, List<Employee>>  mapp = employeeList.stream()
