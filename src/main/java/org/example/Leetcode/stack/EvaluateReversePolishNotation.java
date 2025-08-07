@@ -37,7 +37,7 @@ public class EvaluateReversePolishNotation {
                     stack.push(s);
                     break;
                 }
-                default:stack.push(s);
+                default: stack.push(s);
             }
         }
         return Integer.valueOf(stack.pop());
