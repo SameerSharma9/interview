@@ -1,14 +1,10 @@
 package org.example.stream;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 import javafx.util.Pair;
-import jdk.nashorn.internal.runtime.options.Option;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class Project {
 
